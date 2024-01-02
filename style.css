@@ -1,0 +1,322 @@
+/* RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Mukta', sans-serif;
+}
+
+/* GENERALI */
+.container {
+    min-width: 750px;
+    height: 100vh;
+    
+    background-color: #FAF8EF;
+}
+
+h1, h2 {
+    text-transform: uppercase; 
+
+    color: #776E65;
+}
+
+#app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+    text-align: center;
+
+    font-size: 4rem;
+
+    color: #776E65;
+}
+
+.main-menu .controls h2 {
+    display: inline-block;
+
+    margin: 20px 0;
+
+    padding: 5px 10px;
+    
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+
+    color: #FFFFFF;
+    background-color: #BBADA0;
+
+    cursor: pointer;
+}
+
+/* EFFETTI */
+.controls .start:hover, .controls .restart:hover{
+    color: #776E65;
+    background-color: #FFFFFF;
+
+    border-color:#776E65;
+
+    transition: ease-out 0.5s;
+}
+/* .controls .start:hover {
+    color: #008000;
+}
+
+.controls .restart:hover {
+    color: #FF0000;
+} */
+
+/* MODALE CONFERMA RESET */
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #00000080;
+
+    z-index: 1;
+
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #FEFEFE;
+
+    width: 50%;
+
+    margin: 15% auto;
+    padding: 25px;
+
+    border: 1px solid #BBADA0;
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+.modal-content p:nth-child(2){
+    margin-bottom: 20px;
+}
+
+.modal-content a {
+    margin: 10px;
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+}
+
+.modal-content .modal-confirm {
+    background-color: #3CB879;
+}
+
+.modal-content .modal-retry {
+    background-color: #FD5765;
+}
+
+.modal-content .modal-confirm:hover {
+    color: #FFFFFF;
+    background-color: #1D7449;
+
+    transition: ease-in 0.2s;
+}
+
+.modal-content .modal-retry:hover {
+    color: #FFFFFF;
+    background-color: #B0303B;
+
+    transition: ease-in 0.2s;
+}
+
+/* GRIGLIA DI GIOCO */
+.box {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    width: 500px;
+    height: 500px;
+
+    flex-wrap: wrap;
+
+    padding: 10px;
+    margin: 0 auto;
+
+    border-radius: 10px;
+
+    background-color: #BBADA0;
+}
+
+/* PUNTEGGIO */
+.score-box {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+    width: 500px;
+
+    margin: 0 auto;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-between;
+
+    width: 42%;
+}
+
+.score-box .score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 10px;
+
+    background-color: #BBADA0;
+}
+
+.score-box div h2 {
+    font-size: 1em;
+}
+
+.score-box div p {
+    font-size: 2em;
+    font-weight: bold;
+
+    color: #FFFFFF;
+}
+
+.score-updated {
+    animation: score 150ms ease-in-out;
+}
+
+@keyframes score {
+    0%{
+        transform: scale(0);
+    }
+}
+
+.main-menu {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+
+    width: 500px;
+
+    margin: 0 auto;
+}
+
+.main-menu p{
+    font-size: large;
+
+    color: #BBADA0;
+}
+
+.main-menu p span{
+    color: #776E65;
+    font-weight: bold;
+}
+
+/* CASELLE */
+.box .number-box.no-null, .box .default-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 110px;
+    height: 110px;
+
+    border-radius: 10px;
+
+    font-size: 2.5rem;
+    font-weight: bold;
+    
+    color: #3D3D3D;
+
+    transition: all 150ms ease-in-out;
+}
+
+.box .number-box {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.number-box.no-null.new-number {
+    animation: show 150ms ease-in-out;
+}
+
+@keyframes show {
+    0% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+}
+
+.default {
+    background-color: rgba(238, 228, 218, 0.35);
+}
+
+.number-0 {
+    background-color: rgba(238, 228, 218, 0.35);
+}
+.number-2 {
+    background-color: #EEE4DA;
+}
+.number-4 {
+    background-color: #EEE1C9;
+}
+.number-8 {
+    background-color: #F3B27A;
+}
+.number-16 {
+    background-color: #F69664;
+}
+.number-32 {
+    background-color: #F77C5F;
+}
+.number-64 {
+    background-color: #F75F3B;
+}
+.number-128 {
+    background-color: #EDD073;
+}
+.number-256 {
+    background-color: #EDCC62;
+}
+.number-512 {
+    background-color: #BB9413;
+}
+.number-1024 {
+    background-color: #00FF37;
+}
+
+.no-null.row-0.col-0 { left: 15px; top: 15px;}
+.no-null.row-0.col-1 { left: 135px; top: 15px;}
+.no-null.row-0.col-2 { left: 255px; top: 15px;}
+.no-null.row-0.col-3 { left: 375px; top: 15px;}
+
+.no-null.row-1.col-0 { left: 15px; top: 135px;}
+.no-null.row-1.col-1 { left: 135px; top: 135px;}
+.no-null.row-1.col-2 { left: 255px; top: 135px;}
+.no-null.row-1.col-3 { left: 375px; top: 135px;}
+
+.no-null.row-2.col-0 { left: 15px; top: 255px;}
+.no-null.row-2.col-1 { left: 135px; top: 255px;}
+.no-null.row-2.col-2 { left: 255px; top: 255px;}
+.no-null.row-2.col-3 { left: 375px; top: 255px;}
+
+.no-null.row-3.col-0 { left: 15px; top: 375px;}
+.no-null.row-3.col-1 { left: 135px; top: 375px;}
+.no-null.row-3.col-2 { left: 255px; top: 375px;}
+.no-null.row-3.col-3 { left: 375px; top: 375px;}

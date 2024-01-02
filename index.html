@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>2048</title>
+
+        <!-- FAVICON -->
+        <link rel="icon" type="image/png" href="">
+
+        <!-- FONT -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+        <!-- STILE -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <main class="container">
+            <!-- TODO: RIPRODURRE GRAFICA PUNTEGGIO CON EFFETTO AGGIUNTA PUNTI -->
+            <div id="" class="score-box">
+                <!-- Titolo -->
+                <h1>2048</h1>
+
+                <!-- Punteggio -->
+                <div class="scores">
+                    <!-- Punteggio Attuale -->
+                    <div class="score">
+                        <h2>score</h2>
+                        <p class="number" id="main-score-number">0</p>
+                    </div>
+
+                    <!-- Punteggio MIgliore -->
+                    <div class="top-score score">
+                        <h2>top score</h2>
+                        <p class="number" id="top-score-number">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <div class="main-menu">
+                <p>
+                    Unisci le caselle, arriva a <span>2048!</span>
+                </p>
+
+                <!-- Bottoni -->
+                <div class="controls">
+                    <h2 class="start" onclick="startGame()">
+                        inizia
+                    </h2>
+                    <h2 class="restart" onclick="resetGame()">
+                        resetta
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Modale di Confrerma -->
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <p>Sei sicuro di voler iniziare una nuova partita?</p>
+                    <p>Tutti i progressi attuali saranno persi</p>
+                    <a class="modal-confirm" onclick="resetGameConfirmed()">Resetta</a>
+                    <a class="modal-retry" onclick="closeModal()">Annulla</a>
+                </div>
+            </div>
+
+            <!-- Giglia di gioco -->
+            <div class="box">
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+                <div class="default default-box">
+                    <div class="number-0 number-box"></div>
+                </div>
+            </div>
+
+            <!-- TODO: AGGIUNTA REGOLE IN SEZIONE LATERALE -->
+        </main>
+
+        <script type="text/javascript" src="script.js"></script>
+    </body>
+</html>
