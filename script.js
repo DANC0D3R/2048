@@ -422,19 +422,44 @@ function addNumber(){
 }
 
 // Funzione per aggiornare il punteggio e mostrarlo
-function updateScore(add){
-    score += add;
+function updateScore(add) {
+    // Crea un elemento div per mostrare l'incremento del punteggio
+    let incrementText = document.createElement('div');
+    incrementText.className = 'score-increment';
+
+    // Imposta il testo dell'incremento con il segno appropriato
+    if (add > 0) {
+        incrementText.textContent = '+' + add;
+    } else {
+        incrementText.textContent = add.toString();
+    }
+
+     // Ottieni riferimenti agli elementi HTML del punteggio e del punteggio massimo
     let scoreBox = document.getElementById('main-score-number');
     let topScoreBox = document.getElementById('top-score-number');
 
+     // Aggiorna il punteggio e mostra l'effetto di aggiornamento
+    score += add;
     scoreBox.className += " score-updated";
+    
+    // Rimuovi l'effetto di aggiornamento con un breve ritardo
     setTimeout(() => {
         scoreBox.classList.remove('score-updated');
     }, 100);
 
-    scoreBox.innerHTML = score;
-    if(score > topScore){
+    // Aggiorna l'HTML con il nuovo punteggio
+    scoreBox.innerHTML = score; 
+    // Aggiorna anche il punteggio massimo se necessario
+    if (score > topScore) {
         topScore = score;
         topScoreBox.innerHTML = topScore;
     }
+
+    // Aggiungi il testo di incremento sopra lo score attuale
+    scoreBox.appendChild(incrementText);
+
+    // Rimuovi il testo dopo un breve ritardo
+    setTimeout(() => {
+        scoreBox.removeChild(incrementText);
+    }, 500);
 }
