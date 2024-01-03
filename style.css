@@ -329,6 +329,9 @@ span {
 .number-1024 {
     background-color: #00FF37;
 }
+.number-2048 {
+    background-color: #EDC22E;
+}
 
 .no-null.row-0.col-0 { left: 15px; top: 15px;}
 .no-null.row-0.col-1 { left: 135px; top: 15px;}
