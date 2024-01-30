@@ -9,12 +9,12 @@ let matrix = [
 // Variabili di stato del gioco e inizializzazione di variabili ausiliarie
 let gameStarted = false;
 let prevMatrix = null;
-let newNumber = {row:-1,col:-1};
+let newNumber = {row:-1, col:-1};
 let noEventKey = false;
 let added = false;
 let score = 0;
 let topScore = 0;
-let numberToAdd = {row:-1,col:-1};
+let numberToAdd = {row:-1, col:-1};
 let boxInHtml = null;
 
 // Funzione per resettare il gioco con conferma modale
@@ -83,7 +83,7 @@ function startGame(){
     addNumber();
     boxInHtml = updateBox(); // Chiamata a una funzione per aggiornare la rappresentazione HTML della matrice di gioco
 
-    // Comandi
+    // Comandi (tasti)
     window.addEventListener('keydown' , ()=>{
         if(!noEventKey){
             added = false;
@@ -116,6 +116,66 @@ function startGame(){
             numberToAdd = {row:-1,col:-1};
         }
     });
+
+    // ! DA SISTEMARE
+    // TODO: CERCARE BEST PRACTICE, FUNZIONI DEDICATE O API PER RICONOSCIMENTO DELLO SWIPE (ATTUALMENTE RICONOSCIMENTO SPORADICO ED ESTREMAMENTE IMPRECISO)
+    // Comandi (touch)
+    // Variabili per memorizzare le coordinate di inizio e fine dello swipe
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    let swipeThreshold = 50; // Soglia per considerare lo swipe valido
+    
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchmove', handleTouchMove, false);
+    document.addEventListener('touchend', handleTouchEnd, false);
+    
+    function handleTouchStart(event) {
+        let gridRect = document.querySelector('.box').getBoundingClientRect();
+        if (event.touches[0].clientX >= gridRect.left && event.touches[0].clientX <= gridRect.right &&
+            event.touches[0].clientY >= gridRect.top && event.touches[0].clientY <= gridRect.bottom) {
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        }
+    }
+    
+    function handleTouchMove(event) {
+        event.preventDefault();
+    }
+    
+    function handleTouchEnd(event) {
+        let gridRect = document.querySelector('.box').getBoundingClientRect();
+        if (event.changedTouches[0].clientX >= gridRect.left && event.changedTouches[0].clientX <= gridRect.right &&
+            event.changedTouches[0].clientY >= gridRect.top && event.changedTouches[0].clientY <= gridRect.bottom) {
+            touchEndX = event.changedTouches[0].clientX;
+            touchEndY = event.changedTouches[0].clientY;
+    
+            let deltaX = touchEndX - touchStartX;
+            let deltaY = touchEndY - touchStartY;
+    
+            if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    if (deltaX > 0) {
+                        // Swipe a destra
+                        moveHorizontal(0, 1);
+                    } else {
+                        // Swipe a sinistra
+                        moveHorizontal(3, -1);
+                    }
+                } else {
+                    if (deltaY > 0) {
+                        // Swipe in basso
+                        moveVertical(3, -1);
+                    } else {
+                        // Swipe in alto
+                        moveVertical(0, 1);
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 // TODO: SISTEMARE GAMEOVER (DICHIARA IL GAME OVER QUANDO LA GRIGLIA È PIENA ANCHE SE SI POSSONO FARE ANCORA DELLE MOSSE)
@@ -202,7 +262,7 @@ function addShift(numberToShift, row, col, shift, direction, where){
         null;
     else if(where == "horizontal")
             numberToShift.push({row:row, col:shift, value: matrix[row][col]});
-         else
+        else
             numberToShift.push({row:shift, col:col, value: matrix[row][col]});
         
     removeCol(boxInHtml[row][col]);

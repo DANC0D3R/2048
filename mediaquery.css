@@ -1,0 +1,91 @@
+@media (max-width: 500px) {
+    .container {
+        width: 98%;
+        min-width: 300px;
+
+        margin: 1% auto;
+    }
+
+    /* PUNTEGGIO */
+    .score-box {
+        width: 100%;
+    }
+
+    .scores {
+        justify-content: right;
+
+        width: 53%;
+    }
+
+    .score-box .score {
+        width: 81px;
+        height: 81px;
+    }
+
+    .scores .top-score {
+        margin-left: 5px;
+    }
+
+    /* Menu */
+    .main-menu {
+        width: 100%;
+        
+        margin-bottom: 2rem;
+    }
+
+    .main-menu .controls {
+        text-align: right;
+    }
+    
+    .main-menu .controls h2 {
+        margin: 0;
+
+        font-size: 1.5rem;
+    }
+
+    /* GRIGLIA DI GIOCO */
+    .box{
+        width: 100%;
+        height: auto;
+        min-width: 320px;
+        min-height: 320px;
+        
+        aspect-ratio: 1;
+    }
+
+    /* Tessere */
+    .box .number-box.no-null, .box .default-box {
+        width: 23%;
+        height: 23%;
+    
+        border-radius: 7px;
+    
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .no-null.row-0.col-0 { left: 2.5%; top: 2.5%;}
+    .no-null.row-0.col-1 { left: 26.5%; top: 2.5%;}
+    .no-null.row-0.col-2 { left: 50.5%; top: 2.5%;}
+    .no-null.row-0.col-3 { left: 74.5%; top: 2.5%;}
+
+    .no-null.row-1.col-0 { left: 2.5%; top: 26.5%;}
+    .no-null.row-1.col-1 { left: 26.5%; top: 26.5%;}
+    .no-null.row-1.col-2 { left: 50.5%; top: 26.5%;}
+    .no-null.row-1.col-3 { left: 74.5%; top: 26.5%;}
+
+    .no-null.row-2.col-0 { left: 2.5%; top: 50.5%;}
+    .no-null.row-2.col-1 { left: 26.5%; top: 50.5%;}
+    .no-null.row-2.col-2 { left: 50.5%; top: 50.5%;}
+    .no-null.row-2.col-3 { left: 74.5%; top: 50.5%;}
+
+    .no-null.row-3.col-0 { left: 2.5%; top: 74.5%;}
+    .no-null.row-3.col-1 { left: 26.5%; top: 74.5%;}
+    .no-null.row-3.col-2 { left: 50.5%; top: 74.5%;}
+    .no-null.row-3.col-3 { left: 74.5%; top: 74.5%;}
+
+    /* SEZIONE LATERALE */
+    .rules {
+        display: none;
+    }
+}
