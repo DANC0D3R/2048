@@ -86,6 +86,8 @@
 
     /* SEZIONE LATERALE */
     .rules {
-        display: none;
+        position: static;
+
+        width: 100%;
     }
 }
