@@ -43,6 +43,13 @@
         font-size: 1.5rem;
     }
 
+    /* Modale di conferma */
+    .modal-content {
+        width: 80%;
+
+        margin-top: 50%;
+    }
+
     /* GRIGLIA DI GIOCO */
     .box{
         width: 100%;

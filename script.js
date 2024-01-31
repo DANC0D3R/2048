@@ -77,6 +77,32 @@ function startGame(){
     if(gameStarted)
         return;
 
+        // Riferimento all'elemento della griglia di gioco
+        let gridElement = document.querySelector('.box');
+
+        // Configura Hammer.js sull'elemento della griglia di gioco
+        let hammer = new Hammer(gridElement);
+
+        // Aggiungi il gestore degli eventi swipe
+        hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
+        // Registra gli eventi swipe
+        hammer.on('swipeleft', function () {
+            moveHorizontal(3, -1); // Sposta verso sinistra
+        });
+
+        hammer.on('swiperight', function () {
+            moveHorizontal(0, 1); // Sposta verso destra
+        });
+
+        hammer.on('swipeup', function () {
+            moveVertical(0, 1); // Sposta verso l'alto
+        });
+
+        hammer.on('swipedown', function () {
+            moveVertical(3, -1); // Sposta verso il basso
+        });
+
     // Imposta il gioco come in corso e inizia il gioco generando due numeri casuali
     gameStarted = true;
     addNumber();
@@ -125,7 +151,7 @@ function startGame(){
     let touchStartY = 0;
     let touchEndX = 0;
     let touchEndY = 0;
-    let swipeThreshold = 50; // Soglia per considerare lo swipe valido
+    let swipeThreshold = 30; // Soglia per considerare lo swipe valido
     
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
@@ -141,16 +167,18 @@ function startGame(){
     }
     
     function handleTouchMove(event) {
-        event.preventDefault();
+        let gridRect = document.querySelector('.box').getBoundingClientRect();
+        if (event.touches[0].clientX >= gridRect.left && event.touches[0].clientX <= gridRect.right &&
+            event.touches[0].clientY >= gridRect.top && event.touches[0].clientY <= gridRect.bottom) {
+            touchEndX = event.touches[0].clientX;
+            touchEndY = event.touches[0].clientY;
+        }
     }
     
     function handleTouchEnd(event) {
         let gridRect = document.querySelector('.box').getBoundingClientRect();
         if (event.changedTouches[0].clientX >= gridRect.left && event.changedTouches[0].clientX <= gridRect.right &&
             event.changedTouches[0].clientY >= gridRect.top && event.changedTouches[0].clientY <= gridRect.bottom) {
-            touchEndX = event.changedTouches[0].clientX;
-            touchEndY = event.changedTouches[0].clientY;
-    
             let deltaX = touchEndX - touchStartX;
             let deltaY = touchEndY - touchStartY;
     
@@ -175,7 +203,6 @@ function startGame(){
             }
         }
     }
-    
 }
 
 // TODO: SISTEMARE GAMEOVER (DICHIARA IL GAME OVER QUANDO LA GRIGLIA È PIENA ANCHE SE SI POSSONO FARE ANCORA DELLE MOSSE)
