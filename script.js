@@ -109,6 +109,63 @@ function startGame(){
     addNumber();
     boxInHtml = updateBox(); // Chiamata a una funzione per aggiornare la rappresentazione HTML della matrice di gioco
 
+    let keyHoldTimeout;
+
+    // Comandi (tasti)
+    window.addEventListener('keydown', (event) => {
+        // Verifica se la partita è in corso e se l'evento è associato a un tasto freccia
+        if (gameStarted && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+            event.preventDefault(); // Annulla l'azione predefinita dell'evento
+
+            if (!noEventKey) {
+                added = false;
+                prevMatrix = [...matrix]; // Copia la matrice precedente per confrontare le modifiche
+
+                switch (event.key) {
+                    // Sposta verso l'alto
+                    case 'w':
+                    case 'ArrowUp':
+                        moveVertical(0, 1);
+                        break;
+    
+                    // Sposta verso il basso
+                    case 's':
+                    case 'ArrowDown':
+                        moveVertical(3, -1);
+                        break;
+    
+                    // Sposta verso sinistra
+                    case 'a':
+                    case 'ArrowLeft':
+                        moveHorizontal(0, 1);
+                        break;
+    
+                    // Sposta verso destra
+                    case 'd':
+                    case 'ArrowRight':
+                        moveHorizontal(3, -1);
+                        break;
+                }
+
+                numberToAdd = { row: -1, col: -1 };
+            }
+
+            // Imposta un timeout per rilevare quando il tasto viene rilasciato
+            keyHoldTimeout = setTimeout(() => {
+                keyHoldTimeout = null;
+            }, 100); // Imposta il tempo in millisecondi
+        }
+    });
+
+    window.addEventListener('keyup', (event) => {
+        // Cancella il timeout se il tasto viene rilasciato prima che scatti
+        if (keyHoldTimeout) {
+            clearTimeout(keyHoldTimeout);
+        }
+    });
+
+
+
     // Comandi (tasti)
     window.addEventListener('keydown' , ()=>{
         if(!noEventKey){
@@ -151,7 +208,7 @@ function startGame(){
     let touchStartY = 0;
     let touchEndX = 0;
     let touchEndY = 0;
-    let swipeThreshold = 30; // Soglia per considerare lo swipe valido
+    let swipeThreshold = 50; // Soglia per considerare lo swipe valido
     
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
