@@ -494,6 +494,7 @@ function updateMatrix(numberToShift){
         [0 , 0 , 0 , 0],
         [0 , 0 , 0 , 0]
     ];
+    // console.log('Matrice aggiornata:', matrix);
     for(let i=0; i<numberToShift.length; i++){
         matrix[numberToShift[i].row][numberToShift[i].col] = numberToShift[i].value;
     }
@@ -604,6 +605,8 @@ function updateScore(add) {
 
     // Rimuovi il testo dopo un breve ritardo
     setTimeout(() => {
-        scoreBox.removeChild(incrementText);
+        if (scoreBox.contains(incrementText)) {
+            scoreBox.removeChild(incrementText);
+        }
     }, 500);
 }
