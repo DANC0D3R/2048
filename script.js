@@ -88,7 +88,7 @@ function startGame(){
     // Comandi (tasti)
     window.addEventListener('keydown', (event) => {
         // Verifica se la partita è in corso e se l'evento è associato a un tasto freccia
-        if (gameStarted && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        if (gameStarted && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(event.key)) {
             event.preventDefault(); // Annulla l'azione predefinita dell'evento
 
             if (!noEventKey) {
