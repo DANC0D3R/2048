@@ -77,32 +77,6 @@ function startGame(){
     if(gameStarted)
         return;
 
-        // Riferimento all'elemento della griglia di gioco
-        let gridElement = document.querySelector('.box');
-
-        // Configura Hammer.js sull'elemento della griglia di gioco
-        let hammer = new Hammer(gridElement);
-
-        // Aggiungi il gestore degli eventi swipe
-        hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-
-        // Registra gli eventi swipe
-        hammer.on('swipeleft', function () {
-            moveHorizontal(3, -1); // Sposta verso sinistra
-        });
-
-        hammer.on('swiperight', function () {
-            moveHorizontal(0, 1); // Sposta verso destra
-        });
-
-        hammer.on('swipeup', function () {
-            moveVertical(0, 1); // Sposta verso l'alto
-        });
-
-        hammer.on('swipedown', function () {
-            moveVertical(3, -1); // Sposta verso il basso
-        });
-
     // Imposta il gioco come in corso e inizia il gioco generando due numeri casuali
     gameStarted = true;
     addNumber();
@@ -164,102 +138,10 @@ function startGame(){
         }
     });
 
-
-
-    // Comandi (tasti)
-    window.addEventListener('keydown' , ()=>{
-        if(!noEventKey){
-            added = false;
-            prevMatrix = [...matrix]; // Copia la matrice precedente per confrontare le modifiche
-            switch (event.key) {
-                // Sposta verso l'alto
-                case 'w':
-                case 'ArrowUp':
-                    moveVertical(0, 1);
-                    break;
-
-                // Sposta verso il basso
-                case 's':
-                case 'ArrowDown':
-                    moveVertical(3, -1);
-                    break;
-
-                // Sposta verso sinistra
-                case 'a':
-                case 'ArrowLeft':
-                    moveHorizontal(0, 1);
-                    break;
-
-                // Sposta verso destra
-                case 'd':
-                case 'ArrowRight':
-                    moveHorizontal(3, -1);
-                    break;
-            }
-            numberToAdd = {row:-1,col:-1};
-        }
-    });
-
     // ! DA SISTEMARE
     // TODO: CERCARE BEST PRACTICE, FUNZIONI DEDICATE O API PER RICONOSCIMENTO DELLO SWIPE (ATTUALMENTE RICONOSCIMENTO SPORADICO ED ESTREMAMENTE IMPRECISO)
     // Comandi (touch)
-    // Variabili per memorizzare le coordinate di inizio e fine dello swipe
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-    let swipeThreshold = 50; // Soglia per considerare lo swipe valido
     
-    document.addEventListener('touchstart', handleTouchStart, false);
-    document.addEventListener('touchmove', handleTouchMove, false);
-    document.addEventListener('touchend', handleTouchEnd, false);
-    
-    function handleTouchStart(event) {
-        let gridRect = document.querySelector('.box').getBoundingClientRect();
-        if (event.touches[0].clientX >= gridRect.left && event.touches[0].clientX <= gridRect.right &&
-            event.touches[0].clientY >= gridRect.top && event.touches[0].clientY <= gridRect.bottom) {
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
-        }
-    }
-    
-    function handleTouchMove(event) {
-        let gridRect = document.querySelector('.box').getBoundingClientRect();
-        if (event.touches[0].clientX >= gridRect.left && event.touches[0].clientX <= gridRect.right &&
-            event.touches[0].clientY >= gridRect.top && event.touches[0].clientY <= gridRect.bottom) {
-            touchEndX = event.touches[0].clientX;
-            touchEndY = event.touches[0].clientY;
-        }
-    }
-    
-    function handleTouchEnd(event) {
-        let gridRect = document.querySelector('.box').getBoundingClientRect();
-        if (event.changedTouches[0].clientX >= gridRect.left && event.changedTouches[0].clientX <= gridRect.right &&
-            event.changedTouches[0].clientY >= gridRect.top && event.changedTouches[0].clientY <= gridRect.bottom) {
-            let deltaX = touchEndX - touchStartX;
-            let deltaY = touchEndY - touchStartY;
-    
-            if (Math.abs(deltaX) > swipeThreshold || Math.abs(deltaY) > swipeThreshold) {
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (deltaX > 0) {
-                        // Swipe a destra
-                        moveHorizontal(0, 1);
-                    } else {
-                        // Swipe a sinistra
-                        moveHorizontal(3, -1);
-                    }
-                } else {
-                    if (deltaY > 0) {
-                        // Swipe in basso
-                        moveVertical(3, -1);
-                    } else {
-                        // Swipe in alto
-                        moveVertical(0, 1);
-                    }
-                }
-            }
-        }
-    }
 }
 
 // TODO: SISTEMARE GAMEOVER (DICHIARA IL GAME OVER QUANDO LA GRIGLIA È PIENA ANCHE SE SI POSSONO FARE ANCORA DELLE MOSSE)
