@@ -138,10 +138,70 @@ function startGame(){
         }
     });
 
-    // ! DA SISTEMARE
-    // TODO: CERCARE BEST PRACTICE, FUNZIONI DEDICATE O API PER RICONOSCIMENTO DELLO SWIPE (ATTUALMENTE RICONOSCIMENTO SPORADICO ED ESTREMAMENTE IMPRECISO)
     // Comandi (touch)
+    let touchStartX, touchStartY, touchEndX, touchEndY;
+
+    const gridContainer = document.querySelector('.box'); // Sostituisci '.box' con la classe del tuo contenitore della griglia
+
+    gridContainer.addEventListener('touchstart', (event) => {
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    });
+
+    gridContainer.addEventListener('touchmove', (event) => {
+        touchEndX = event.touches[0].clientX;
+        touchEndY = event.touches[0].clientY;
+        
+        handleSwipe();
+        // Blocca lo scroll della pagina durante lo swipe
+        event.preventDefault();
+    });
+
+    // Funzione che determina la direzione dello swipe e simula la pressione del rispettivo tasto freccia
+    function handleSwipe() {
+        if (gameStarted) {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                // Spostamento orizzontale
+                if (deltaX > 0) {
+                    // Swipe verso destra
+                    console.log('Swipe da sinistra a destra');
+                    // Sposta verso destra
+                    simulateKeyPress('ArrowRight');
+                } else {
+                    // Swipe verso sinistra
+                    console.log('Swipe da destra a sinistra');
+                    // Sposta verso sinistra
+                    simulateKeyPress('ArrowLeft');
+
+                }
+            } else {
+                // Spostamento verticale
+                if (deltaY > 0) {
+                    // Swipe verso il basso
+                    console.log('Swipe dall\'alto verso il basso');
+                    // Sposta verso il basso
+                    simulateKeyPress('ArrowDown');
+                } else {
+                    // Swipe verso l'alto
+                    console.log('Swipe dal basso verso l\'alto');
+                    // Sposta verso l'alto
+                    simulateKeyPress('ArrowUp');
+                }
+            }
+        }
+    }
+
+    // Funzione che simula la pressione di un tasto
+    function simulateKeyPress(key) {
+        const event = new KeyboardEvent('keydown', {
+            key: key,
+        });
     
+        window.dispatchEvent(event);
+    }
 }
 
 // TODO: SISTEMARE GAMEOVER (DICHIARA IL GAME OVER QUANDO LA GRIGLIA È PIENA ANCHE SE SI POSSONO FARE ANCORA DELLE MOSSE)
