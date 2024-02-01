@@ -353,6 +353,9 @@ span {
 .no-null.row-3.col-2 { left: 255px; top: 375px;}
 .no-null.row-3.col-3 { left: 375px; top: 375px;}
 
+#rules-link {
+    display: none;
+}
 
 /* SEZIONE LATERALE */
 .rules {
@@ -380,7 +383,7 @@ span {
 }
 
 /* TASTI */
-.arrow-images {
+.controls-images {
     width: 70%;
     height: 100px; 
     
@@ -423,35 +426,6 @@ span {
 }
 
 /* GESTURE   */
-/* .gesture {
-    text-align: center;
-
-    width: 70%;
-    height: 70px;
-
-    margin: 2px;
-}
-
-.gesture img {
-    height: 100%;
-
-    transform: rotate(80deg);
-}
-
-.gesture:hover {
-    animation: rotateAnimation 1s;
-
-}
-
-@keyframes rotateAnimation {
-    0% {
-        transform: rotate(0);
-    }
-    to {
-        transform: rotate(-60deg);
-    }
-} */
-
 .swipe {
     display: flex;
     justify-content: center;

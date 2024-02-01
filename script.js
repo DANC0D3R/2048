@@ -268,7 +268,7 @@ function updateBox(){
 
 // Funzione ausiliaria per convertire un array in una matrice
 function convertToMatrix(array, elementsPerSubArray) {
-    var matrix = [], i, k;
+    let matrix = [], i, k;
 
     for (i = 0, k = -1; i < array.length; i++) {
         if (i % elementsPerSubArray === 0) {
@@ -447,7 +447,7 @@ function updateMatrix(numberToShift){
         // Verifica se il gioco è finito dopo l'aggiunta di un nuovo numero
         if (isGameOver()) {
             alert("Game Over! Punteggio: " + score);
-            resetGameConfirmed(); // Puoi resettare automaticamente il gioco o eseguire altre azioni
+            resetGameConfirmed(); // Si può resettare automaticamente il gioco o eseguire altre azioni
             return;
         }
 
@@ -521,7 +521,7 @@ function updateScore(add) {
         incrementText.textContent = add.toString();
     }
 
-     // Ottieni riferimenti agli elementi HTML del punteggio e del punteggio massimo
+     // Ottiene riferimenti agli elementi HTML del punteggio e del punteggio massimo
     let scoreBox = document.getElementById('main-score-number');
     let topScoreBox = document.getElementById('top-score-number');
 
@@ -529,7 +529,7 @@ function updateScore(add) {
     score += add;
     scoreBox.className += " score-updated";
     
-    // Rimuovi l'effetto di aggiornamento con un breve ritardo
+    // Rimuove l'effetto di aggiornamento con un breve ritardo
     setTimeout(() => {
         scoreBox.classList.remove('score-updated');
     }, 100);
@@ -542,13 +542,47 @@ function updateScore(add) {
         topScoreBox.innerHTML = topScore;
     }
 
-    // Aggiungi il testo di incremento sopra lo score attuale
+    // Aggiunge il testo di incremento sopra lo score attuale
     scoreBox.appendChild(incrementText);
 
-    // Rimuovi il testo dopo un breve ritardo
+    // Rimuove il testo dopo un breve ritardo
     setTimeout(() => {
         if (scoreBox.contains(incrementText)) {
             scoreBox.removeChild(incrementText);
         }
     }, 500);
 }
+
+// Funzione per mostrare la sezione laterale (regole)
+document.addEventListener('DOMContentLoaded', function () {
+    // Trova l'elemento rules-link
+    let rulesLink = document.getElementById('rules-link');
+    
+    // Trova l'elemento dell'aside
+    let rulesAside = document.querySelector('.rules');
+
+    // Trova l'elemento del pulsante di chiusura
+    let closeRules = document.querySelector('.close-rules');
+
+    // Aggiunge un gestore di eventi al clic sul link delle regole
+    rulesLink.addEventListener('click', function () {
+        // Imposta display: block per rendere visibile l'aside
+        rulesAside.style.display = 'block';
+        setTimeout(function () {
+            // Ritarda l'aggiunta della classe 'active' all'aside per mostrare l'animazione di entrata
+            rulesAside.classList.add('active');
+        }, 100);
+    });
+
+    // Aggiunge un gestore di eventi al clic sul pulsante di chiusura delle regole
+    closeRules.addEventListener('click', function () {
+        // Rimuove la classe 'active' dall'aside per mostrare l'animazione di uscita
+        rulesAside.classList.remove('active');
+        // Ritarda l'impostazione di display: none fino a quando l'animazione è completata
+        setTimeout(function () {
+            rulesAside.style.display = 'none';
+        }, 2000);
+    });
+    
+    
+});

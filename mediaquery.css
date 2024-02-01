@@ -1,9 +1,9 @@
 @media (max-width: 500px) {
     .container {
-        width: 98%;
+        width: 96%;
         min-width: 300px;
 
-        margin: 1% auto;
+        margin: 5% auto;
     }
 
     /* PUNTEGGIO */
@@ -56,6 +56,8 @@
         height: auto;
         min-width: 320px;
         min-height: 320px;
+
+        margin-bottom: 15%;
         
         aspect-ratio: 1;
     }
@@ -91,10 +93,56 @@
     .no-null.row-3.col-2 { left: 50.5%; top: 74.5%;}
     .no-null.row-3.col-3 { left: 74.5%; top: 74.5%;}
 
+    #rules-link {
+        display: block;
+        text-align: center;
+
+        font-size: 1.5rem;
+        font-weight: bold;
+
+        color: #BBADA0;
+    }
+
+    #rules-link:hover {
+        color: #776E65; 
+
+        text-shadow: 1px 1px 1px #888888;
+    }
+
     /* SEZIONE LATERALE */
     .rules {
-        position: static;
+        display: none;
+        left: -100%;
 
-        width: 100%;
+        width: 90%;
+        height: 100%;
+
+        background-color: #CDC1B4;
+
+        z-index: 10;
+
+        transition: left 1s ease-in-out;
+    }
+
+    .rules.active {
+        left: 0;
+    }
+
+    .close-rules {
+        cursor: pointer;
+    }
+
+    .close-rules {
+        position: absolute;
+        top: 0.8%;
+        right: 5%;
+
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .controls-images {
+        margin: 0 auto;
+        margin-bottom: 3%;
     }
 }
