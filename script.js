@@ -19,17 +19,18 @@ let boxInHtml = null;
 
 // Funzione per resettare il gioco con conferma modale
 function resetGame() {
-    // Se il gioco non è ancora iniziato, esci dalla funzione
+    // Se il gioco non è ancora iniziato, esce dalla funzione
     if (!gameStarted)
         return;
 
-    // Apri la modale di conferma
+    // Apre la modale di conferma
     showModal();
 }
 
 // Funzione per confermare il reset del gioco
 function resetGameConfirmed() {
-    closeModal(); // Chiudi la modale di conferma
+    // Chiude la modale di conferma
+    closeModal();
     // Resetta il gioco solo se è già iniziato
     if (gameStarted) {
         // Reimposta le variabili di stato e la matrice di gioco
@@ -46,9 +47,13 @@ function resetGameConfirmed() {
         added = false;
         score = 0;
         numberToAdd = { row: -1, col: -1 };
-        resetBoxInHtml(); // Chiamata a una funzione ausiliaria per reimpostare l'HTML dei numeri nel gioco
-        updateScore(0); // Chiamata a una funzione per aggiornare il punteggio nel gioco
-        startGame(); // Riavvia il gioco
+        
+         // Chiamata a una funzione ausiliaria per reimpostare l'HTML dei numeri nel gioco
+        resetBoxInHtml();
+         // Chiamata a una funzione per aggiornare il punteggio nel gioco
+        updateScore(0);
+        // Riavvia il gioco
+        startGame();
     }
 }
 
@@ -77,7 +82,7 @@ function startGame(){
     if(gameStarted)
         return;
 
-    // Imposta il gioco come in corso e inizia il gioco generando due numeri casuali
+    // Imposta il gioco come "in corso" e inizia il gioco generando due numeri casuali
     gameStarted = true;
     addNumber();
     addNumber();
@@ -87,13 +92,15 @@ function startGame(){
 
     // Comandi (tasti)
     window.addEventListener('keydown', (event) => {
-        // Verifica se la partita è in corso e se l'evento è associato a un tasto freccia
+        // Verifica se la partita è in corso e se l'evento è associato a un tasto freccia o WASD
         if (gameStarted && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(event.key)) {
-            event.preventDefault(); // Annulla l'azione predefinita dell'evento
+            // Annulla l'azione predefinita dell'evento
+            event.preventDefault();
 
             if (!noEventKey) {
                 added = false;
-                prevMatrix = [...matrix]; // Copia la matrice precedente per confrontare le modifiche
+                 // Copia la matrice precedente per confrontare le modifiche
+                prevMatrix = [...matrix];
 
                 switch (event.key) {
                     // Sposta verso l'alto
@@ -141,7 +148,7 @@ function startGame(){
     // Comandi (touch)
     let touchStartX, touchStartY, touchEndX, touchEndY;
 
-    const gridContainer = document.querySelector('.box'); // Sostituisci '.box' con la classe del tuo contenitore della griglia
+    const gridContainer = document.querySelector('.box');
 
     gridContainer.addEventListener('touchstart', (event) => {
         touchStartX = event.touches[0].clientX;
@@ -157,7 +164,7 @@ function startGame(){
         event.preventDefault();
     });
 
-    // Funzione che determina la direzione dello swipe e simula la pressione del rispettivo tasto freccia
+    // Funzione che determina la direzione dello swipe associa alla simulazione della pressione del rispettivo tasto freccia
     function handleSwipe() {
         if (gameStarted) {
             const deltaX = touchEndX - touchStartX;
@@ -213,7 +220,8 @@ function isGameOver() {
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             if (matrix[i][j] === 0) {
-                gridFull = false; // Ci sono spazi vuoti, la griglia non è piena
+                // Ci sono spazi vuoti, la griglia non è piena
+                gridFull = false;
             }
         }
     }
@@ -227,7 +235,8 @@ function isGameOver() {
                 (j - 1 >= 0 && matrix[i][j] === matrix[i][j - 1]) ||
                 (j + 1 < 4 && matrix[i][j] === matrix[i][j + 1])
             ) {
-                movesAvailable = true; // Ci sono ancora mosse disponibili
+                // Ci sono ancora mosse disponibili
+                movesAvailable = true;
             }
         }
     }
@@ -337,11 +346,12 @@ function moveHorizontal(pos , direction){
         }
     }
     if(numberToShift.length > 0)
-        updateMatrix(numberToShift); // Chiamata a una funzione per aggiornare la matrice dopo lo spostamento
+        // Chiamata alla funzione per aggiornare la matrice dopo lo spostamento
+        updateMatrix(numberToShift);
 }
 
 // Funzione per spostare i numeri verticalmente
-function moveVertical(pos , direction){
+function moveVertical(pos, direction){
     let numberToShift = [];
     let shift = 0;
     for (let col = 0; col < 4; col++){
@@ -360,7 +370,8 @@ function moveVertical(pos , direction){
         }
     }
     if(numberToShift.length > 0)
-        updateMatrix(numberToShift); // Chiamata a una funzione per aggiornare la matrice dopo lo spostamento
+    // Chiamata alla funzione per aggiornare la matrice dopo lo spostamento
+        updateMatrix(numberToShift);
 }
 
 // Funzione per verificare la somma di numeri adiacenti nella stessa riga o colonna
@@ -370,10 +381,11 @@ function checkSum(row, col, direction, colOrRow){
         for(let k=row + direction; greaterOrLess(k , direction); k = k + direction){
             if(matrix[row][col] == matrix[k][col]){
                 matrix[row][col] *= 2;
-                updateScore( matrix[row][col]); // Aggiorna il punteggio dopo la somma
-                //matrix[k][col] = 0;
+                // Aggiorna il punteggio dopo la somma
+                updateScore( matrix[row][col]);
                 added = true;
-                numberAdded = {row:k , col:col}; // Restituisce la posizione del numero sommato
+                // Restituisce la posizione del numero sommato
+                numberAdded = {row:k , col:col};
                 break;
             } else 
                 if(matrix[k][col] != 0)
@@ -384,10 +396,11 @@ function checkSum(row, col, direction, colOrRow){
         for(let k=col + direction; greaterOrLess(k , direction); k = k + direction){
             if(matrix[row][col] == matrix[row][k]){
                 matrix[row][col] *= 2;
-                updateScore( matrix[row][col]); // Aggiorna il punteggio dopo la somma
-                //matrix[row][k] = 0;
+                // Aggiorna il punteggio dopo la somma
+                updateScore( matrix[row][col]);
                 added = true;
-                numberAdded = {row:row , col:k}; // Restituisce la posizione del numero sommato
+                // Restituisce la posizione del numero sommato
+                numberAdded = {row:row , col:k};
                 break;
             } else 
                 if(matrix[row][k] != 0)
@@ -429,7 +442,8 @@ function removeCol(elem){
 
 // Funzione per aggiornare la matrice di gioco dopo uno spostamento
 function updateMatrix(numberToShift){
-    noEventKey = true; // Imposta una bandiera per evitare nuovi eventi di tastiera durante l'animazione
+    // Imposta una bandiera per evitare nuovi eventi di tastiera durante l'animazione
+    noEventKey = true;
     matrix = [
         [0 , 0 , 0 , 0],
         [0 , 0 , 0 , 0],
@@ -442,12 +456,14 @@ function updateMatrix(numberToShift){
     }
 
     if(!areEqualMtrx(matrix, prevMatrix) || added == true)
-        addNumber(); // Aggiunge un nuovo numero dopo lo spostamento solo se la matrice è cambiata o è stata effettuata una somma
+     // Aggiunge un nuovo numero dopo lo spostamento solo se la matrice è cambiata o è stata effettuata una somma
+        addNumber();
 
         // Verifica se il gioco è finito dopo l'aggiunta di un nuovo numero
         if (isGameOver()) {
             alert("Game Over! Punteggio: " + score);
-            resetGameConfirmed(); // Si può resettare automaticamente il gioco o eseguire altre azioni
+            // Si può resettare automaticamente il gioco o eseguire altre azioni
+            resetGameConfirmed();
             return;
         }
 
@@ -462,13 +478,15 @@ function updateMatrix(numberToShift){
     }
     
     boxInHtml = 0;
-    boxInHtml = updateBox(); // Aggiorna la rappresentazione HTML della matrice di gioco    
-    noEventKey = false; // Resetta la bandiera per permettere nuovi eventi di tastiera
+    // Aggiorna la rappresentazione HTML della matrice di gioco
+    boxInHtml = updateBox();
+    // Resetta la bandiera per permettere nuovi eventi di tastiera
+    noEventKey = false;
     }, 150);
 }
 
 // Funzione per verificare l'uguaglianza tra due array di oggetti
-function areEqualObj(a1 , a2){
+function areEqualObj(a1, a2){
     if(a1.length != a2.length)
         return false;
     for (let index = 0; index < a1.length; index++) {
@@ -483,7 +501,7 @@ function areEqualObj(a1 , a2){
 }
 
 // Funzione per verificare l'uguaglianza tra due matrici
-function areEqualMtrx(a1 , a2){
+function areEqualMtrx(a1, a2){
     if(a1.length != a2.length){
         return false;}
     for (let index = 0; index < a1.length; index++) {
@@ -495,14 +513,15 @@ function areEqualMtrx(a1 , a2){
     return true;
 }
 
-// Funzione per aggiungere un nuovo numero (2) alla matrice di gioco
+// Funzione per aggiungere un nuovo numero alla matrice di gioco
 function addNumber(){
     while(1){
         let random = Math.floor(Math.random()*4);
         let random2 = Math.floor(Math.random()*4);
         if(matrix[random][random2] == 0){
             matrix[random][random2] = 2;
-            newNumber = {row:random, col:random2}; // Memorizza la posizione del nuovo numero aggiunto
+            // Memorizza la posizione del nuovo numero aggiunto
+            newNumber = {row:random, col:random2};
             break;
         }
     }
@@ -583,6 +602,4 @@ document.addEventListener('DOMContentLoaded', function () {
             rulesAside.style.display = 'none';
         }, 2000);
     });
-    
-    
 });
