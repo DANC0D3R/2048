@@ -3,7 +3,8 @@
         width: 96%;
         min-width: 300px;
 
-        margin: 5% auto;
+        margin: 0 auto;
+        padding-top: 1rem;
     }
 
     /* PUNTEGGIO */
