@@ -60,7 +60,7 @@ span {
 }
 
 /* EFFETTI */
-.controls .start:hover, .controls .restart:hover{
+.controls .start:hover, .controls .restart:hover {
     color: #776E65;
     background-color: #FFFFFF;
 
@@ -68,13 +68,6 @@ span {
 
     transition: ease-out 0.5s;
 }
-/* .controls .start:hover {
-    color: #008000;
-}
-
-.controls .restart:hover {
-    color: #FF0000;
-} */
 
 /* MODALE CONFERMA RESET */
 .modal {
@@ -107,7 +100,7 @@ span {
     text-align: center;
 }
 
-.modal-content p:nth-child(2){
+.modal-content p:nth-child(2) {
     margin-bottom: 20px;
 }
 
@@ -180,7 +173,8 @@ span {
     width: 42%;
 }
 
-.score-box .score {
+/* Punteggio */
+.scores .score {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -193,11 +187,11 @@ span {
     background-color: #BBADA0;
 }
 
-.score-box div h2 {
+.score-box .scores h2 {
     font-size: 1em;
 }
 
-.score-box div p {
+.score-box .scores p {
     font-size: 2em;
     font-weight: bold;
 
@@ -250,7 +244,7 @@ span {
     margin: 0 auto;
 }
 
-.main-menu p{
+.main-menu p {
     font-size: large;
 
     color: #BBADA0;
@@ -353,35 +347,48 @@ span {
 .no-null.row-3.col-2 { left: 255px; top: 375px;}
 .no-null.row-3.col-3 { left: 375px; top: 375px;}
 
+/* Link a  Regole */
 #rules-link {
     display: none;
 }
 
-/* SEZIONE LATERALE */
+/* SEZIONE LATERALE (REGOLE)*/
 .rules {
     position: fixed;
     top: 0;
     left: 0;
 
     width: 250px;
+    height: 100vh;
 
     padding: 20px;
 
-    overflow-y: auto;
-    
+    background-color: #CDC1B4;
+
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.212);
+
+    overflow-y: auto;
+}
+
+/* Bottone per chiudere la sezione */
+.close-rules {
+    display: none;
 }
 
 .rules h2 {
-    font-size: 1.5em;
     margin-bottom: 10px;
+
+    font-size: 1.5em;
+
     color: #776E65;
 }
 
 .rules p {
-    font-size: 1em;
-    color: #3D3D3D;
     margin-bottom: 15px;
+
+    font-size: 1em;
+    
+    color: #3D3D3D;
 }
 
 /* TASTI */
