@@ -211,7 +211,6 @@ function startGame(){
     }
 }
 
-// TODO: SISTEMARE GAMEOVER (DICHIARA IL GAME OVER QUANDO LA GRIGLIA È PIENA ANCHE SE SI POSSONO FARE ANCORA DELLE MOSSE)
 function isGameOver() {
     let gridFull = true; // Flag per verificare se la griglia è piena
     let movesAvailable = false; // Flag per verificare se ci sono ancora mosse disponibili
